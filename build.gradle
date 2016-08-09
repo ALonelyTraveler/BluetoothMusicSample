@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven{
+            url 'https://dl.bintray.com/chen455687686/maven'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def libraryVersion = "1.0.0"
+
+ext {
+//-------- bintray config -----------
+    userOrg = "chen455687686"//bintray.com用户名
+    groupId = "com.bandou"//jcenter上的路径
+    publishVersion = libraryVersion//版本号
+    desc = "This is a bluetooth library"//类库的描述，不重要
+    website = "https://github.com/ALonelyTraveler/BluetoothMusicSample"//类库的网站，不重要
+    uploadName = "BluetoothMusicLibrary" //上传在bintray的文件夹
+    licences = ["Apache-2.0"]
+// --------bintray config-----
+}

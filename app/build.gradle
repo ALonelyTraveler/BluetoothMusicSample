@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.bandou.music.sample"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**图片加载库**/
+    /** 动态注入库，参考网址：https://github.com/JakeWharton/butterknife    **/
+    /**
+     * android6.0 运行时权限配置
+     * 参考网址：https://github.com/hotchemi/PermissionsDispatcher
+     */
+    compile project(':a2dplibrary')
+
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    compile 'com.github.hotchemi:permissionsdispatcher:2.1.3'
+    compile 'com.android.support:cardview-v7:24.1.1'
+    compile 'com.bandou:bluetoothlibrary:0.2.1'
+    compile 'com.bandou:library:0.1.3-Beta'
+    compile 'com.bandou:music:0.1.0'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
+}

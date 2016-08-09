@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--颜色定义-->
+    <color name="main_color">#4E9CBE</color>
+    <color name="clean_white">#FFFFFF</color>
+    <color name="clean_black">#000000</color>
+    <color name="alpha_d9_white">#D9FFFFFF</color>
+    <color name="item_pressed">#E0E0E0</color>
+    <color name="item_disabled">#E0E0E0</color>
+    <color name="txt_disabled">#80dfdddd</color>
+    <color name="txt_yellow">#FFF2B93F</color>
+    <color name="gray">#C8C8C8</color>
+    <color name="trans_black">#90000000</color>
+</resources>

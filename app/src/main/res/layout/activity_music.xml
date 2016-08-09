@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_app_all"
+            android:scaleType="centerCrop"
+            />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/alpha_d9_white"
+                            style="@style/activity_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:id="@+id/lltMusicName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:paddingTop="@dimen/regular_dimen_x10"
+                                android:paddingBottom="@dimen/regular_dimen_x10"
+                                >
+
+                            <android.support.v7.widget.AppCompatTextView
+                                    android:text="Select Music"
+                                    style="@style/inset_list_item_left_blue"/>
+
+                            <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/tvMusicName"
+                                    style="@style/inset_list_item_right_yellow"/>
+
+                        </LinearLayout>
+
+
+                        <include layout="@layout/include_line"/>
+
+                        <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                            <ImageView
+                                    android:id="@+id/ivForward"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerVertical="true"
+                                    android:padding="@dimen/regular_dimen_x10"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/icon_music_back_selector"/>
+
+                            <ImageView
+                                    android:id="@+id/ivPlayOrPause"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:padding="@dimen/regular_dimen_x10"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/ic_music_play_or_pause"/>
+
+
+                            <ImageView
+                                    android:id="@+id/ivBackward"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:padding="@dimen/regular_dimen_x10"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/music_fast_selector"/>
+
+
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:orientation="horizontal"
+                                android:paddingTop="@dimen/regular_dimen_x10"
+                                android:paddingBottom="@dimen/regular_dimen_x10"
+                                >
+
+
+                            <android.support.v7.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/regular_dimen_x5"
+                                    android:gravity="center"
+                                    android:text="00:00"
+                                    android:id="@+id/tvBegin"
+                                    android:textColor="@color/main_color"
+                                    android:textSize="@dimen/font_size_medium"
+                                    />
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    style="@style/app_seek_bar_parent"
+                                    >
+
+                                <SeekBar
+                                        android:id="@+id/barMusicProgress"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:max="10"
+                                        android:indeterminate="false"
+                                        style="@style/app_seek_bar"/>
+                            </LinearLayout>
+
+                            <android.support.v7.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/regular_dimen_x5"
+                                    android:gravity="center"
+                                    android:text="00:00"
+                                    android:id="@+id/tvEnd"
+                                    android:textSize="@dimen/font_size_medium"
+                                    android:textColor="@color/main_color"/>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:orientation="horizontal"
+                                android:paddingTop="@dimen/regular_dimen_x10"
+                                android:paddingBottom="@dimen/regular_dimen_x10"
+                                >
+
+                            <android.support.v7.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/font_size_medium"
+                                    android:text="Music"
+                                    android:textColor="@android:color/darker_gray"
+                                    />
+
+
+                            <ImageView
+                                    android:id="@+id/ivLoop"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:clickable="true"
+                                    android:layout_toLeftOf="@+id/ivRandom"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/music_loop_play_selector"/>
+
+                            <ImageView
+                                    android:clickable="true"
+                                    android:id="@+id/ivRandom"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="@dimen/regular_dimen_x5"
+                                    android:gravity="center"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/music_radom_play_selector"/>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

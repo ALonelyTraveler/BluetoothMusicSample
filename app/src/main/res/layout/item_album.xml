@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/regular_dimen_x7"
+        android:paddingRight="@dimen/regular_dimen_x7"
+        android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="false"
+            app:cardCornerRadius="8dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="@dimen/regular_dimen_x10"
+            app:cardElevation="8dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                >
+
+            <ImageView
+                    android:id="@+id/ivCover"
+                    android:layout_height="@dimen/activity_album_cover_width"
+                    android:layout_width="@dimen/activity_album_cover_width"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/no_image"
+                    />
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/regular_dimen_x8"
+                    android:paddingRight="@dimen/regular_dimen_x8"
+                    >
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:text="Album title 1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:id="@+id/tvName"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        style="@style/inset_list_item_left_blue"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:text="Artist 1"
+                        android:id="@+id/tvArtist"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/font_size_small"
+                        android:textColor="@color/gray"
+                        style="@style/inset_list_item_left_blue"/>
+            </LinearLayout>
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/indicator_arrow_yellow"
+                    />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

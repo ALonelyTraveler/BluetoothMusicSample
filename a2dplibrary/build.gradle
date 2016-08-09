@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'org.greenrobot:eventbus:3.0.0'
+}
+
+//添加
+publish {
+    artifactId = 'a2dp'//模块名称
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    uploadName = rootProject.uploadName //模块上传后所在的文件夹名称
+    publishVersion = rootProject.publishVersion//模块版本号
+    desc = rootProject.description//模块的描述
+    website = rootProject.website //模块的网站
+    licences = rootProject.licences //模块的licences
+}
