@@ -314,7 +314,7 @@ public class AutoConnect {
     }
 
     public void destroy() throws Exception {
-        Log.v(TAG, "destroy");
+        Log.v(TAG, "destroy---");
         onDispatchWorker();
         mMainHandler = null;
         if (mContext != null) {

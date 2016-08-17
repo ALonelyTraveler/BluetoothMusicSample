@@ -30,7 +30,7 @@ public class A2dpManager {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             try {
-                a2dpConnect = (msg.what == AutoConnect.MSG_CONNECT_SUCCESS && (mAutoConnect != null && mAutoConnect.isA2dpConnected()));
+                a2dpConnect = (msg.what == AutoConnect.MSG_CONNECT_SUCCESS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
