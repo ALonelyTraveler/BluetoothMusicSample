@@ -2,7 +2,7 @@
 在个人写的[音乐播放器API](https://github.com/ALonelyTraveler/MusicLibrarySample)和[蓝牙连接框架](https://github.com/ALonelyTraveler/BluetoothLibrarySample)的基础上添加蓝牙连接A2DP进行音乐播放的功能，源码部分并不多，主要是对蓝牙进行A2DP连接。
 
 ##当前版本(VERSION)
-[![Maven Central](https://img.shields.io/badge/VERSION-1.0.0-orange.svg)](https://bintray.com/gcssloop/maven/sutil/view)
+[![Maven Central](https://img.shields.io/badge/VERSION-1.0.1-orange.svg)](https://bintray.com/gcssloop/maven/sutil/view)
 
 ## gradle依赖
 
