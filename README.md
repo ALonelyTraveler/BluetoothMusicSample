@@ -51,7 +51,8 @@
 >* app工程中添加android.permission.BROADCAST_STICKY和android.permission.BIND_ACCESSIBILITY_SERVICE权限
 >* 修改library和app工程的编译版本,避免在android6.0以上无法使用的情况,如果有必要大家可以自己添加运行时权限的功能
 >* 修改A2DP连接成功时提示连接失败的bug
->* 参考https://derivedcode.wordpress.com/2013/10/09/connecting-to-a-bluetooth-a2dp-device-from-android/
+>* 参考[Connecting to a Bluetooth A2DP Device from android](https://derivedcode.wordpress.com/2013/10/09/connecting-to-a-bluetooth-a2dp-device-from-android/)
+>
 >--------------------------------------
 >
 >1.0.0 (2016-8-9)
