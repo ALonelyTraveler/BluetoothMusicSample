@@ -9,7 +9,7 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.novoda:bintray-release:0.3.4'
+        classpath 'com.novoda:bintray-release:0.4.0'
     }
     dependencies {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
@@ -33,6 +33,7 @@ def libraryVersion = "1.0.2"
 
 ext {
 //-------- bintray config -----------
+    //https://github.com/zhou411424/lcworklib
     userOrg = "chen455687686"//bintray.com用户名
     groupId = "com.bandou"//jcenter上的路径
     publishVersion = libraryVersion//版本号
