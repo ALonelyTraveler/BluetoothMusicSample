@@ -24,6 +24,8 @@ public class AutoConnect {
 
     public static final int MSG_CONNECT_FAIL = 10001;
 
+    public static final int MSG_QUERY_CONNECTED_DEVICES = 10002;
+
     public static final int MSG_DELAY = 500;
 
     private final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -72,6 +74,27 @@ public class AutoConnect {
         }
     };
 
+    private final Runnable mConnectedDevicesRunnable = new Runnable() {
+        @Override
+        public void run() {
+            List<BluetoothDevice> devices = null;
+            try {
+                devices = queryConnectDevice();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            Message message = Message.obtain();
+            message.what = MSG_QUERY_CONNECTED_DEVICES;
+            message.obj = devices;
+            mMainHandler.sendMessage(message);
+        }
+    };
+
+    /**
+     * 待运行的Runnable
+     */
+    private Runnable waitRunnable = null;
+
     private final ServiceConnection mA2dpServiceConnection = new ServiceConnection() {
 
         @Override
@@ -115,7 +138,6 @@ public class AutoConnect {
         return (Build.VERSION.SDK_INT >= 17);
     }
 
-    @SuppressWarnings("MissingPermission")
     private void doBTConnect() throws Exception {
         Log.v(TAG, "-----------------------------doBTConnect-----------");
         if (isDevicePaired(mBluetoothAdapter.getBondedDevices())) {
@@ -191,7 +213,25 @@ public class AutoConnect {
 
     public void startConnect(BluetoothDevice aBluetoothDevice) {
         mBluetoothDevice = aBluetoothDevice;
+        waitRunnable = mAutoConnectRunnable;
         checkA2dpServiceIsReady();
+    }
+
+    public void setBluetoothDevice(BluetoothDevice device) {
+        this.mBluetoothDevice = device;
+    }
+
+    public void startQueryDevices() {
+        waitRunnable = mConnectedDevicesRunnable;
+        checkA2dpServiceIsReady();
+    }
+
+    private List<BluetoothDevice> queryConnectDevice() throws RemoteException {
+        if (isAboveJBMR1()) {
+            return mIBluetoothA2dp.getConnectedDevices();
+        } else {
+            return mBluetoothA2dp.getConnectedDevices();
+        }
     }
 
 
@@ -212,7 +252,7 @@ public class AutoConnect {
                                 }
                             } else {
                                 if (mWorkerThreadHandler != null)
-                                    mWorkerThreadHandler.post(mAutoConnectRunnable);
+                                    mWorkerThreadHandler.post(waitRunnable);
                                 break;
                             }
                         } else {
@@ -225,7 +265,7 @@ public class AutoConnect {
                                 }
                             } else {
                                 if (mWorkerThreadHandler != null)
-                                    mWorkerThreadHandler.post(mAutoConnectRunnable);
+                                    mWorkerThreadHandler.post(waitRunnable);
                                 break;
                             }
                         }
@@ -236,7 +276,7 @@ public class AutoConnect {
             }
         }).start();
     }
-    @SuppressWarnings("MissingPermission")
+
     private boolean isDevicePaired(final Set<BluetoothDevice> list) {
         for (final BluetoothDevice device : list) {
             if (device.getName().equalsIgnoreCase(mBluetoothDevice.getName())) {
@@ -252,7 +292,7 @@ public class AutoConnect {
         final Boolean returnValue = (Boolean) createBondMethod.invoke(bluetoothDevice);
         return returnValue.booleanValue();
     }
-    @SuppressWarnings("MissingPermission")
+
     private void pairToDevice() throws Exception {
         createBond(mBluetoothDevice.getClass(), mBluetoothDevice);
         Log.v(TAG, "pairToDevice");
@@ -298,7 +338,7 @@ public class AutoConnect {
             return true;
         return false;
     }
-    @SuppressWarnings("MissingPermission")
+
     private boolean isA2dpConnectBelowJBMR1() throws RemoteException {
         final int state = mBluetoothA2dp.getConnectionState(mBluetoothDevice);
         Log.v(TAG, "A2dp state = " + state);
@@ -314,7 +354,7 @@ public class AutoConnect {
     }
 
     public void destroy() throws Exception {
-        Log.v(TAG, "destroy---");
+        Log.v(TAG, "destroy");
         onDispatchWorker();
         mMainHandler = null;
         if (mContext != null) {

@@ -1,12 +1,18 @@
 package com.bandou.bluetooth.a2dp;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+
+import com.bandou.bluetooth.a2dp.event.A2dpConnectedDevicesEvent;
 import com.bandou.bluetooth.a2dp.event.A2dpStatusEvent;
+
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 /**
  * ClassName: A2dpManager
@@ -29,12 +35,22 @@ public class A2dpManager {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            try {
-                a2dpConnect = (msg.what == AutoConnect.MSG_CONNECT_SUCCESS);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (msg.what == AutoConnect.MSG_CONNECT_SUCCESS || msg.what == AutoConnect.MSG_CONNECT_FAIL) {
+                try {
+                    a2dpConnect = (msg.what == AutoConnect.MSG_CONNECT_SUCCESS && (mAutoConnect != null && mAutoConnect.isA2dpConnected()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                EventBus.getDefault().post(new A2dpStatusEvent(a2dpConnect));
+            } else if (msg.what == AutoConnect.MSG_QUERY_CONNECTED_DEVICES) {
+                Object devicesObj = msg.obj;
+                if (devicesObj == null) {
+                    EventBus.getDefault().post(new A2dpConnectedDevicesEvent(null));
+                } else {
+                    EventBus.getDefault().post(new A2dpConnectedDevicesEvent((List<BluetoothDevice>) devicesObj));
+                }
+
             }
-            EventBus.getDefault().post(new A2dpStatusEvent(a2dpConnect));
         }
     };
 
@@ -68,6 +84,15 @@ public class A2dpManager {
         mAutoConnect.startConnect(BluetoothAdapter.getDefaultAdapter().getRemoteDevice(mac));
     }
 
+    /**
+     * 查询所有连接设备
+     */
+    public void queryConnectedDevices(Context context) {
+        if (mAutoConnect == null) {
+            mAutoConnect = new AutoConnect(context.getApplicationContext(), connectHandler);
+        }
+        mAutoConnect.startQueryDevices();
+    }
 
     /**
      * 关闭连接
@@ -83,6 +108,11 @@ public class A2dpManager {
             mAutoConnect = null;
         }
         connectHandler.removeCallbacksAndMessages(null);
+    }
+
+    public void connected(BluetoothDevice bluetoothDevice) {
+        a2dpConnect = true;
+        mAutoConnect.setBluetoothDevice(bluetoothDevice);
     }
 
 
